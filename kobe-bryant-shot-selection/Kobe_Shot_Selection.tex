@@ -1,0 +1,700 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Kobe\_Final},
+  pdfauthor={Christian Yang},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Kobe\_Final}
+\author{Christian Yang}
+\date{2023-12-16}
+
+\begin{document}
+\maketitle
+
+\hypertarget{load-packages}{%
+\subsection{Load packages}\label{load-packages}}
+
+Loading the dataset from a CSV file
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataPath }\OtherTok{\textless{}{-}} \StringTok{"/Users/christian/Desktop/STAT348/Kobe/kobe{-}bryant{-}shot{-}selection/data.csv"}
+\NormalTok{kobeData }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{fread}\NormalTok{(dataPath, }\AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{stringsAsFactors =} \ConstantTok{TRUE}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+Splitting the dataset into training and testing sets Training set: Data
+with known shot outcomes (non-NA in `shot\_made\_flag') Testing set:
+Data where shot outcomes need to be predicted (NA in `shot\_made\_flag')
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainingSet }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(kobeData, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(kobeData}\SpecialCharTok{$}\NormalTok{shot\_made\_flag))}
+\NormalTok{testingSet }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(kobeData, }\FunctionTok{is.na}\NormalTok{(kobeData}\SpecialCharTok{$}\NormalTok{shot\_made\_flag))}
+\end{Highlighting}
+\end{Shaded}
+
+Preparing the data Extracting `shot\_id' for submission and removing it
+from training and testing sets
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{testShotId }\OtherTok{\textless{}{-}}\NormalTok{ testingSet}\SpecialCharTok{$}\NormalTok{shot\_id}
+\NormalTok{trainingSet}\SpecialCharTok{$}\NormalTok{shot\_id }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{testingSet}\SpecialCharTok{$}\NormalTok{shot\_id }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\end{Highlighting}
+\end{Shaded}
+
+Feature Engineering Creating a new feature `remaining\_time' by
+combining minutes and seconds remaining
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainingSet}\SpecialCharTok{$}\NormalTok{remaining\_time }\OtherTok{\textless{}{-}}\NormalTok{ trainingSet}\SpecialCharTok{$}\NormalTok{minutes\_remaining }\SpecialCharTok{*} \DecValTok{60} \SpecialCharTok{+}\NormalTok{ trainingSet}\SpecialCharTok{$}\NormalTok{seconds\_remaining}
+\NormalTok{testingSet}\SpecialCharTok{$}\NormalTok{remaining\_time }\OtherTok{\textless{}{-}}\NormalTok{ testingSet}\SpecialCharTok{$}\NormalTok{minutes\_remaining }\SpecialCharTok{*} \DecValTok{60} \SpecialCharTok{+}\NormalTok{ testingSet}\SpecialCharTok{$}\NormalTok{seconds\_remaining}
+\end{Highlighting}
+\end{Shaded}
+
+Data Cleaning Capping `shot\_distance' at 45 to remove outliers
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainingSet}\SpecialCharTok{$}\NormalTok{shot\_distance[trainingSet}\SpecialCharTok{$}\NormalTok{shot\_distance }\SpecialCharTok{\textgreater{}} \DecValTok{45}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{45}
+\NormalTok{testingSet}\SpecialCharTok{$}\NormalTok{shot\_distance[testingSet}\SpecialCharTok{$}\NormalTok{shot\_distance }\SpecialCharTok{\textgreater{}} \DecValTok{45}\NormalTok{] }\OtherTok{\textless{}{-}} \DecValTok{45}
+\end{Highlighting}
+\end{Shaded}
+
+Removing unnecessary features that do not contribute to the model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{colsToRemove }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"seconds\_remaining"}\NormalTok{, }\StringTok{"team\_name"}\NormalTok{, }\StringTok{"team\_id"}\NormalTok{, }\StringTok{"game\_event\_id"}\NormalTok{, }\StringTok{"game\_id"}\NormalTok{, }\StringTok{"lat"}\NormalTok{, }\StringTok{"lon"}\NormalTok{)}
+\NormalTok{trainingSet[, colsToRemove] }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{testingSet[, colsToRemove] }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\end{Highlighting}
+\end{Shaded}
+
+Preparing the target variable and features for the model Separating the
+label (shot\_made\_flag) from the training data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainLabels }\OtherTok{\textless{}{-}}\NormalTok{ trainingSet}\SpecialCharTok{$}\NormalTok{shot\_made\_flag}
+\NormalTok{trainingSet}\SpecialCharTok{$}\NormalTok{shot\_made\_flag }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{testingSet}\SpecialCharTok{$}\NormalTok{shot\_made\_flag }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\end{Highlighting}
+\end{Shaded}
+
+Initializing a vector to store predictions
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{predictionVector }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{nrow}\NormalTok{(testingSet))}
+\end{Highlighting}
+\end{Shaded}
+
+Data Transformation Converting data frames to matrices which are
+required for xgboost training
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainMatrix }\OtherTok{\textless{}{-}} \FunctionTok{data.matrix}\NormalTok{(trainingSet, }\AttributeTok{rownames.force =} \ConstantTok{NA}\NormalTok{)}
+\NormalTok{dTrainMatrix }\OtherTok{\textless{}{-}} \FunctionTok{xgb.DMatrix}\NormalTok{(}\AttributeTok{data =}\NormalTok{ trainMatrix, }\AttributeTok{label =}\NormalTok{ trainLabels, }\AttributeTok{missing =} \ConstantTok{NaN}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Setting up the training environment Creating a watchlist to monitor the
+training performance
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trainingWatchlist }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{dtrain =}\NormalTok{ dTrainMatrix)}
+\end{Highlighting}
+\end{Shaded}
+
+Setting a random seed for reproducibility
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Configuring the parameters for the xgboost model Adjusting parameters
+like `eta', `max\_depth' for better performance
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xgbParams }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+  \AttributeTok{objective =} \StringTok{"binary:logistic"}\NormalTok{,}
+  \AttributeTok{booster =} \StringTok{"gbtree"}\NormalTok{,}
+  \AttributeTok{eval\_metric =} \StringTok{"logloss"}\NormalTok{,}
+  \AttributeTok{eta =} \FloatTok{0.05}\NormalTok{,}
+  \AttributeTok{max\_depth =} \DecValTok{5}\NormalTok{,}
+  \AttributeTok{subsample =} \FloatTok{0.5}\NormalTok{,}
+  \AttributeTok{colsample\_bytree =} \FloatTok{0.5}\NormalTok{,}
+  \AttributeTok{min\_child\_weight =} \DecValTok{1}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Performing cross-validation to determine the optimal number of boosting
+rounds \# `nfold' and `early.stop.round' are set to prevent overfitting
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{xgbModelCV }\OtherTok{\textless{}{-}} \FunctionTok{xgb.cv}\NormalTok{(}
+  \AttributeTok{params =}\NormalTok{ xgbParams, }
+  \AttributeTok{data =}\NormalTok{ dTrainMatrix, }
+  \AttributeTok{nrounds =} \DecValTok{2000}\NormalTok{,}
+  \AttributeTok{verbose =} \DecValTok{1}\NormalTok{,}
+  \AttributeTok{watchlist =}\NormalTok{ trainingWatchlist,}
+  \AttributeTok{maximize =} \ConstantTok{FALSE}\NormalTok{,}
+  \AttributeTok{nfold =} \DecValTok{5}\NormalTok{,}
+  \AttributeTok{early.stop.round =} \DecValTok{20}\NormalTok{,}
+  \AttributeTok{print.every.n =} \DecValTok{1}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: 'early.stop.round' is deprecated.
+## Use 'early_stopping_rounds' instead.
+## See help("Deprecated") and help("xgboost-deprecated").
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: 'print.every.n' is deprecated.
+## Use 'print_every_n' instead.
+## See help("Deprecated") and help("xgboost-deprecated").
+\end{verbatim}
+
+\begin{verbatim}
+## [1]  train-logloss:0.687363+0.002295 test-logloss:0.687623+0.002301 
+## Multiple eval metrics are present. Will use test_logloss for early stopping.
+## Will train until test_logloss hasn't improved in 20 rounds.
+## 
+## [2]  train-logloss:0.681857+0.001731 test-logloss:0.682307+0.001550 
+## [3]  train-logloss:0.677209+0.002969 test-logloss:0.677860+0.002554 
+## [4]  train-logloss:0.673135+0.003967 test-logloss:0.674139+0.003381 
+## [5]  train-logloss:0.670119+0.005130 test-logloss:0.671438+0.004429 
+## [6]  train-logloss:0.664923+0.003859 test-logloss:0.666375+0.002986 
+## [7]  train-logloss:0.662021+0.003691 test-logloss:0.663611+0.003038 
+## [8]  train-logloss:0.659283+0.004509 test-logloss:0.661064+0.003769 
+## [9]  train-logloss:0.655050+0.004470 test-logloss:0.657024+0.003744 
+## [10] train-logloss:0.651947+0.005356 test-logloss:0.654111+0.004572 
+## [11] train-logloss:0.649557+0.006204 test-logloss:0.651945+0.005181 
+## [12] train-logloss:0.647931+0.006305 test-logloss:0.650491+0.005278 
+## [13] train-logloss:0.644370+0.005408 test-logloss:0.647138+0.004394 
+## [14] train-logloss:0.642060+0.005337 test-logloss:0.644954+0.003954 
+## [15] train-logloss:0.639619+0.005650 test-logloss:0.642814+0.004247 
+## [16] train-logloss:0.638024+0.005770 test-logloss:0.641381+0.004255 
+## [17] train-logloss:0.635277+0.005459 test-logloss:0.638825+0.003633 
+## [18] train-logloss:0.633373+0.004784 test-logloss:0.637073+0.002510 
+## [19] train-logloss:0.631691+0.004458 test-logloss:0.635572+0.002204 
+## [20] train-logloss:0.630125+0.004274 test-logloss:0.634208+0.002031 
+## [21] train-logloss:0.629086+0.004770 test-logloss:0.633373+0.002402 
+## [22] train-logloss:0.627550+0.004751 test-logloss:0.632003+0.002618 
+## [23] train-logloss:0.625592+0.004924 test-logloss:0.630256+0.002640 
+## [24] train-logloss:0.624601+0.004734 test-logloss:0.629475+0.002793 
+## [25] train-logloss:0.622439+0.004376 test-logloss:0.627565+0.002482 
+## [26] train-logloss:0.621296+0.004509 test-logloss:0.626661+0.002202 
+## [27] train-logloss:0.620217+0.004693 test-logloss:0.625802+0.002058 
+## [28] train-logloss:0.619183+0.004713 test-logloss:0.624871+0.002483 
+## [29] train-logloss:0.618283+0.005138 test-logloss:0.624205+0.002752 
+## [30] train-logloss:0.617027+0.004984 test-logloss:0.623099+0.002540 
+## [31] train-logloss:0.616051+0.004726 test-logloss:0.622378+0.002280 
+## [32] train-logloss:0.615283+0.004381 test-logloss:0.621736+0.002140 
+## [33] train-logloss:0.614196+0.004701 test-logloss:0.620881+0.001874 
+## [34] train-logloss:0.613433+0.004368 test-logloss:0.620285+0.001805 
+## [35] train-logloss:0.612433+0.003763 test-logloss:0.619500+0.002025 
+## [36] train-logloss:0.611586+0.003907 test-logloss:0.618833+0.001671 
+## [37] train-logloss:0.611215+0.003914 test-logloss:0.618632+0.001645 
+## [38] train-logloss:0.610621+0.003858 test-logloss:0.618245+0.001269 
+## [39] train-logloss:0.609801+0.003840 test-logloss:0.617634+0.001608 
+## [40] train-logloss:0.609088+0.003750 test-logloss:0.617067+0.002000 
+## [41] train-logloss:0.608197+0.003339 test-logloss:0.616336+0.002305 
+## [42] train-logloss:0.607620+0.003119 test-logloss:0.615967+0.002434 
+## [43] train-logloss:0.606901+0.002912 test-logloss:0.615471+0.002443 
+## [44] train-logloss:0.606007+0.002850 test-logloss:0.614810+0.002560 
+## [45] train-logloss:0.605311+0.002604 test-logloss:0.614331+0.002533 
+## [46] train-logloss:0.604460+0.002581 test-logloss:0.613734+0.002458 
+## [47] train-logloss:0.603909+0.002815 test-logloss:0.613341+0.002399 
+## [48] train-logloss:0.603349+0.002686 test-logloss:0.612881+0.002506 
+## [49] train-logloss:0.602458+0.002399 test-logloss:0.612208+0.002724 
+## [50] train-logloss:0.601982+0.002462 test-logloss:0.611921+0.002692 
+## [51] train-logloss:0.601338+0.002454 test-logloss:0.611503+0.002712 
+## [52] train-logloss:0.600928+0.002323 test-logloss:0.611262+0.002900 
+## [53] train-logloss:0.600348+0.002361 test-logloss:0.610829+0.002926 
+## [54] train-logloss:0.599801+0.002261 test-logloss:0.610564+0.003052 
+## [55] train-logloss:0.599375+0.002411 test-logloss:0.610363+0.002953 
+## [56] train-logloss:0.599044+0.002489 test-logloss:0.610144+0.002932 
+## [57] train-logloss:0.598571+0.002293 test-logloss:0.609894+0.003069 
+## [58] train-logloss:0.598149+0.002270 test-logloss:0.609703+0.003193 
+## [59] train-logloss:0.597846+0.002363 test-logloss:0.609609+0.003227 
+## [60] train-logloss:0.597391+0.002326 test-logloss:0.609326+0.003359 
+## [61] train-logloss:0.596823+0.002246 test-logloss:0.608968+0.003448 
+## [62] train-logloss:0.596422+0.002147 test-logloss:0.608757+0.003564 
+## [63] train-logloss:0.596179+0.002186 test-logloss:0.608680+0.003532 
+## [64] train-logloss:0.596003+0.002136 test-logloss:0.608677+0.003522 
+## [65] train-logloss:0.595521+0.002006 test-logloss:0.608408+0.003741 
+## [66] train-logloss:0.595016+0.002014 test-logloss:0.608180+0.003747 
+## [67] train-logloss:0.594640+0.001941 test-logloss:0.607963+0.003869 
+## [68] train-logloss:0.594289+0.001978 test-logloss:0.607762+0.003847 
+## [69] train-logloss:0.593974+0.002074 test-logloss:0.607604+0.003762 
+## [70] train-logloss:0.593580+0.001873 test-logloss:0.607383+0.003966 
+## [71] train-logloss:0.593215+0.001986 test-logloss:0.607227+0.003895 
+## [72] train-logloss:0.592825+0.001809 test-logloss:0.606991+0.003994 
+## [73] train-logloss:0.592566+0.001882 test-logloss:0.606927+0.003907 
+## [74] train-logloss:0.592215+0.001850 test-logloss:0.606818+0.003980 
+## [75] train-logloss:0.591848+0.001819 test-logloss:0.606727+0.004087 
+## [76] train-logloss:0.591420+0.001885 test-logloss:0.606529+0.004104 
+## [77] train-logloss:0.591116+0.001797 test-logloss:0.606353+0.004196 
+## [78] train-logloss:0.590776+0.001660 test-logloss:0.606193+0.004300 
+## [79] train-logloss:0.590459+0.001585 test-logloss:0.606077+0.004287 
+## [80] train-logloss:0.590074+0.001537 test-logloss:0.605928+0.004342 
+## [81] train-logloss:0.589816+0.001470 test-logloss:0.605848+0.004366 
+## [82] train-logloss:0.589484+0.001436 test-logloss:0.605736+0.004366 
+## [83] train-logloss:0.589183+0.001398 test-logloss:0.605583+0.004436 
+## [84] train-logloss:0.588800+0.001473 test-logloss:0.605408+0.004379 
+## [85] train-logloss:0.588485+0.001418 test-logloss:0.605269+0.004467 
+## [86] train-logloss:0.588162+0.001415 test-logloss:0.605134+0.004485 
+## [87] train-logloss:0.587905+0.001460 test-logloss:0.605047+0.004466 
+## [88] train-logloss:0.587648+0.001443 test-logloss:0.604945+0.004514 
+## [89] train-logloss:0.587388+0.001464 test-logloss:0.604912+0.004460 
+## [90] train-logloss:0.587117+0.001433 test-logloss:0.604853+0.004505 
+## [91] train-logloss:0.586890+0.001500 test-logloss:0.604792+0.004475 
+## [92] train-logloss:0.586624+0.001420 test-logloss:0.604708+0.004547 
+## [93] train-logloss:0.586417+0.001389 test-logloss:0.604688+0.004588 
+## [94] train-logloss:0.586132+0.001338 test-logloss:0.604564+0.004623 
+## [95] train-logloss:0.585860+0.001344 test-logloss:0.604443+0.004654 
+## [96] train-logloss:0.585623+0.001384 test-logloss:0.604406+0.004643 
+## [97] train-logloss:0.585276+0.001338 test-logloss:0.604255+0.004721 
+## [98] train-logloss:0.585032+0.001369 test-logloss:0.604170+0.004660 
+## [99] train-logloss:0.584876+0.001399 test-logloss:0.604121+0.004680 
+## [100]    train-logloss:0.584601+0.001370 test-logloss:0.604150+0.004682 
+## [101]    train-logloss:0.584338+0.001336 test-logloss:0.604083+0.004704 
+## [102]    train-logloss:0.584073+0.001407 test-logloss:0.604073+0.004702 
+## [103]    train-logloss:0.583902+0.001365 test-logloss:0.604058+0.004733 
+## [104]    train-logloss:0.583669+0.001376 test-logloss:0.604023+0.004669 
+## [105]    train-logloss:0.583498+0.001322 test-logloss:0.604000+0.004646 
+## [106]    train-logloss:0.583235+0.001311 test-logloss:0.603931+0.004680 
+## [107]    train-logloss:0.583027+0.001342 test-logloss:0.603921+0.004620 
+## [108]    train-logloss:0.582775+0.001355 test-logloss:0.603876+0.004643 
+## [109]    train-logloss:0.582563+0.001296 test-logloss:0.603843+0.004699 
+## [110]    train-logloss:0.582297+0.001309 test-logloss:0.603803+0.004667 
+## [111]    train-logloss:0.582083+0.001295 test-logloss:0.603718+0.004628 
+## [112]    train-logloss:0.581872+0.001306 test-logloss:0.603731+0.004619 
+## [113]    train-logloss:0.581649+0.001301 test-logloss:0.603704+0.004606 
+## [114]    train-logloss:0.581403+0.001327 test-logloss:0.603651+0.004552 
+## [115]    train-logloss:0.581208+0.001305 test-logloss:0.603660+0.004567 
+## [116]    train-logloss:0.581048+0.001301 test-logloss:0.603673+0.004575 
+## [117]    train-logloss:0.580836+0.001275 test-logloss:0.603603+0.004618 
+## [118]    train-logloss:0.580641+0.001251 test-logloss:0.603581+0.004569 
+## [119]    train-logloss:0.580404+0.001288 test-logloss:0.603585+0.004555 
+## [120]    train-logloss:0.580212+0.001307 test-logloss:0.603538+0.004554 
+## [121]    train-logloss:0.579972+0.001246 test-logloss:0.603563+0.004586 
+## [122]    train-logloss:0.579737+0.001288 test-logloss:0.603665+0.004588 
+## [123]    train-logloss:0.579524+0.001243 test-logloss:0.603719+0.004568 
+## [124]    train-logloss:0.579338+0.001258 test-logloss:0.603652+0.004546 
+## [125]    train-logloss:0.579158+0.001271 test-logloss:0.603687+0.004572 
+## [126]    train-logloss:0.578973+0.001203 test-logloss:0.603651+0.004593 
+## [127]    train-logloss:0.578769+0.001184 test-logloss:0.603680+0.004625 
+## [128]    train-logloss:0.578555+0.001213 test-logloss:0.603675+0.004574 
+## [129]    train-logloss:0.578336+0.001204 test-logloss:0.603663+0.004572 
+## [130]    train-logloss:0.578129+0.001223 test-logloss:0.603651+0.004589 
+## [131]    train-logloss:0.577893+0.001208 test-logloss:0.603655+0.004571 
+## [132]    train-logloss:0.577673+0.001210 test-logloss:0.603661+0.004523 
+## [133]    train-logloss:0.577480+0.001171 test-logloss:0.603632+0.004464 
+## [134]    train-logloss:0.577287+0.001185 test-logloss:0.603618+0.004490 
+## [135]    train-logloss:0.577108+0.001130 test-logloss:0.603609+0.004482 
+## [136]    train-logloss:0.576912+0.001100 test-logloss:0.603606+0.004485 
+## [137]    train-logloss:0.576726+0.001089 test-logloss:0.603547+0.004489 
+## [138]    train-logloss:0.576538+0.001076 test-logloss:0.603562+0.004494 
+## [139]    train-logloss:0.576301+0.001094 test-logloss:0.603453+0.004455 
+## [140]    train-logloss:0.576165+0.001071 test-logloss:0.603449+0.004403 
+## [141]    train-logloss:0.575988+0.001058 test-logloss:0.603443+0.004422 
+## [142]    train-logloss:0.575759+0.001042 test-logloss:0.603340+0.004462 
+## [143]    train-logloss:0.575568+0.001030 test-logloss:0.603322+0.004478 
+## [144]    train-logloss:0.575371+0.001005 test-logloss:0.603334+0.004537 
+## [145]    train-logloss:0.575141+0.001000 test-logloss:0.603299+0.004571 
+## [146]    train-logloss:0.574942+0.000980 test-logloss:0.603287+0.004612 
+## [147]    train-logloss:0.574771+0.000975 test-logloss:0.603332+0.004597 
+## [148]    train-logloss:0.574548+0.000928 test-logloss:0.603360+0.004566 
+## [149]    train-logloss:0.574387+0.000974 test-logloss:0.603344+0.004541 
+## [150]    train-logloss:0.574200+0.001002 test-logloss:0.603323+0.004537 
+## [151]    train-logloss:0.573989+0.000974 test-logloss:0.603329+0.004566 
+## [152]    train-logloss:0.573830+0.000950 test-logloss:0.603302+0.004572 
+## [153]    train-logloss:0.573646+0.000957 test-logloss:0.603251+0.004584 
+## [154]    train-logloss:0.573432+0.000943 test-logloss:0.603211+0.004671 
+## [155]    train-logloss:0.573270+0.000921 test-logloss:0.603208+0.004693 
+## [156]    train-logloss:0.573130+0.000872 test-logloss:0.603245+0.004668 
+## [157]    train-logloss:0.572982+0.000846 test-logloss:0.603288+0.004702 
+## [158]    train-logloss:0.572772+0.000889 test-logloss:0.603300+0.004713 
+## [159]    train-logloss:0.572615+0.000864 test-logloss:0.603328+0.004683 
+## [160]    train-logloss:0.572443+0.000868 test-logloss:0.603329+0.004722 
+## [161]    train-logloss:0.572245+0.000868 test-logloss:0.603300+0.004707 
+## [162]    train-logloss:0.572066+0.000918 test-logloss:0.603334+0.004725 
+## [163]    train-logloss:0.571858+0.000901 test-logloss:0.603300+0.004713 
+## [164]    train-logloss:0.571683+0.000933 test-logloss:0.603275+0.004754 
+## [165]    train-logloss:0.571497+0.000921 test-logloss:0.603284+0.004787 
+## [166]    train-logloss:0.571319+0.000901 test-logloss:0.603301+0.004807 
+## [167]    train-logloss:0.571150+0.000887 test-logloss:0.603350+0.004776 
+## [168]    train-logloss:0.571002+0.000874 test-logloss:0.603330+0.004768 
+## [169]    train-logloss:0.570850+0.000862 test-logloss:0.603299+0.004737 
+## [170]    train-logloss:0.570673+0.000826 test-logloss:0.603269+0.004780 
+## [171]    train-logloss:0.570486+0.000788 test-logloss:0.603313+0.004820 
+## [172]    train-logloss:0.570306+0.000766 test-logloss:0.603278+0.004810 
+## [173]    train-logloss:0.570139+0.000757 test-logloss:0.603235+0.004813 
+## [174]    train-logloss:0.570003+0.000756 test-logloss:0.603263+0.004822 
+## [175]    train-logloss:0.569813+0.000773 test-logloss:0.603271+0.004835 
+## Stopping. Best iteration:
+## [155]    train-logloss:0.573270+0.000921 test-logloss:0.603208+0.004693
+\end{verbatim}
+
+Inspecting the structure of the cross-validation result to find the
+optimal round
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{summary}\NormalTok{(xgbModelCV))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                 Length Class      Mode   
+## call            10     -none-     call   
+## params          12     -none-     list   
+## callbacks        3     -none-     list   
+## evaluation_log   5     data.table list   
+## niter            1     -none-     numeric
+## nfeatures        1     -none-     numeric
+## folds            5     -none-     list   
+## best_iteration   1     -none-     numeric
+## best_ntreelimit  1     -none-     numeric
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(xgbModelCV}\SpecialCharTok{$}\NormalTok{evaluation\_log))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "iter"               "train_logloss_mean" "train_logloss_std" 
+## [4] "test_logloss_mean"  "test_logloss_std"
+\end{verbatim}
+
+Determining the best round based on minimum test logloss
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{optimalRound }\OtherTok{\textless{}{-}} \FunctionTok{which.min}\NormalTok{(xgbModelCV}\SpecialCharTok{$}\NormalTok{evaluation\_log}\SpecialCharTok{$}\NormalTok{test\_logloss\_mean)}
+\end{Highlighting}
+\end{Shaded}
+
+Training the final xgboost model with the optimal number of rounds
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{finalModel }\OtherTok{\textless{}{-}} \FunctionTok{xgb.train}\NormalTok{(}
+  \AttributeTok{params =}\NormalTok{ xgbParams, }
+  \AttributeTok{data =}\NormalTok{ dTrainMatrix, }
+  \AttributeTok{nrounds =}\NormalTok{ optimalRound, }
+  \AttributeTok{verbose =} \DecValTok{1}\NormalTok{,}
+  \AttributeTok{watchlist =}\NormalTok{ trainingWatchlist,}
+  \AttributeTok{maximize =} \ConstantTok{FALSE}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  dtrain-logloss:0.685520 
+## [2]  dtrain-logloss:0.682713 
+## [3]  dtrain-logloss:0.679300 
+## [4]  dtrain-logloss:0.673009 
+## [5]  dtrain-logloss:0.670761 
+## [6]  dtrain-logloss:0.665040 
+## [7]  dtrain-logloss:0.660021 
+## [8]  dtrain-logloss:0.658306 
+## [9]  dtrain-logloss:0.656759 
+## [10] dtrain-logloss:0.654700 
+## [11] dtrain-logloss:0.653362 
+## [12] dtrain-logloss:0.649082 
+## [13] dtrain-logloss:0.647880 
+## [14] dtrain-logloss:0.644038 
+## [15] dtrain-logloss:0.643101 
+## [16] dtrain-logloss:0.642083 
+## [17] dtrain-logloss:0.638556 
+## [18] dtrain-logloss:0.635443 
+## [19] dtrain-logloss:0.632510 
+## [20] dtrain-logloss:0.629903 
+## [21] dtrain-logloss:0.629315 
+## [22] dtrain-logloss:0.626917 
+## [23] dtrain-logloss:0.624635 
+## [24] dtrain-logloss:0.623805 
+## [25] dtrain-logloss:0.621705 
+## [26] dtrain-logloss:0.620064 
+## [27] dtrain-logloss:0.618266 
+## [28] dtrain-logloss:0.617605 
+## [29] dtrain-logloss:0.616927 
+## [30] dtrain-logloss:0.615336 
+## [31] dtrain-logloss:0.613936 
+## [32] dtrain-logloss:0.612510 
+## [33] dtrain-logloss:0.612070 
+## [34] dtrain-logloss:0.611608 
+## [35] dtrain-logloss:0.611259 
+## [36] dtrain-logloss:0.610950 
+## [37] dtrain-logloss:0.609784 
+## [38] dtrain-logloss:0.609376 
+## [39] dtrain-logloss:0.608223 
+## [40] dtrain-logloss:0.607245 
+## [41] dtrain-logloss:0.607006 
+## [42] dtrain-logloss:0.606020 
+## [43] dtrain-logloss:0.605106 
+## [44] dtrain-logloss:0.604112 
+## [45] dtrain-logloss:0.603242 
+## [46] dtrain-logloss:0.602395 
+## [47] dtrain-logloss:0.602145 
+## [48] dtrain-logloss:0.601382 
+## [49] dtrain-logloss:0.600672 
+## [50] dtrain-logloss:0.600104 
+## [51] dtrain-logloss:0.599831 
+## [52] dtrain-logloss:0.599510 
+## [53] dtrain-logloss:0.599000 
+## [54] dtrain-logloss:0.598437 
+## [55] dtrain-logloss:0.598133 
+## [56] dtrain-logloss:0.597465 
+## [57] dtrain-logloss:0.597201 
+## [58] dtrain-logloss:0.597030 
+## [59] dtrain-logloss:0.596575 
+## [60] dtrain-logloss:0.596097 
+## [61] dtrain-logloss:0.595833 
+## [62] dtrain-logloss:0.595408 
+## [63] dtrain-logloss:0.595205 
+## [64] dtrain-logloss:0.594985 
+## [65] dtrain-logloss:0.594494 
+## [66] dtrain-logloss:0.594186 
+## [67] dtrain-logloss:0.593758 
+## [68] dtrain-logloss:0.593378 
+## [69] dtrain-logloss:0.593172 
+## [70] dtrain-logloss:0.592962 
+## [71] dtrain-logloss:0.592755 
+## [72] dtrain-logloss:0.592349 
+## [73] dtrain-logloss:0.592181 
+## [74] dtrain-logloss:0.592005 
+## [75] dtrain-logloss:0.591672 
+## [76] dtrain-logloss:0.591515 
+## [77] dtrain-logloss:0.591225 
+## [78] dtrain-logloss:0.590879 
+## [79] dtrain-logloss:0.590462 
+## [80] dtrain-logloss:0.590222 
+## [81] dtrain-logloss:0.590108 
+## [82] dtrain-logloss:0.589874 
+## [83] dtrain-logloss:0.589580 
+## [84] dtrain-logloss:0.589435 
+## [85] dtrain-logloss:0.589246 
+## [86] dtrain-logloss:0.589008 
+## [87] dtrain-logloss:0.588786 
+## [88] dtrain-logloss:0.588519 
+## [89] dtrain-logloss:0.588281 
+## [90] dtrain-logloss:0.588093 
+## [91] dtrain-logloss:0.587867 
+## [92] dtrain-logloss:0.587629 
+## [93] dtrain-logloss:0.587491 
+## [94] dtrain-logloss:0.587279 
+## [95] dtrain-logloss:0.587157 
+## [96] dtrain-logloss:0.586992 
+## [97] dtrain-logloss:0.586825 
+## [98] dtrain-logloss:0.586637 
+## [99] dtrain-logloss:0.586481 
+## [100]    dtrain-logloss:0.586270 
+## [101]    dtrain-logloss:0.586206 
+## [102]    dtrain-logloss:0.586066 
+## [103]    dtrain-logloss:0.585910 
+## [104]    dtrain-logloss:0.585786 
+## [105]    dtrain-logloss:0.585663 
+## [106]    dtrain-logloss:0.585512 
+## [107]    dtrain-logloss:0.585323 
+## [108]    dtrain-logloss:0.585203 
+## [109]    dtrain-logloss:0.584954 
+## [110]    dtrain-logloss:0.584679 
+## [111]    dtrain-logloss:0.584427 
+## [112]    dtrain-logloss:0.584199 
+## [113]    dtrain-logloss:0.584104 
+## [114]    dtrain-logloss:0.583971 
+## [115]    dtrain-logloss:0.583825 
+## [116]    dtrain-logloss:0.583653 
+## [117]    dtrain-logloss:0.583460 
+## [118]    dtrain-logloss:0.583294 
+## [119]    dtrain-logloss:0.583151 
+## [120]    dtrain-logloss:0.582983 
+## [121]    dtrain-logloss:0.582871 
+## [122]    dtrain-logloss:0.582750 
+## [123]    dtrain-logloss:0.582657 
+## [124]    dtrain-logloss:0.582379 
+## [125]    dtrain-logloss:0.582128 
+## [126]    dtrain-logloss:0.581927 
+## [127]    dtrain-logloss:0.581799 
+## [128]    dtrain-logloss:0.581612 
+## [129]    dtrain-logloss:0.581367 
+## [130]    dtrain-logloss:0.581198 
+## [131]    dtrain-logloss:0.581018 
+## [132]    dtrain-logloss:0.580907 
+## [133]    dtrain-logloss:0.580731 
+## [134]    dtrain-logloss:0.580482 
+## [135]    dtrain-logloss:0.580237 
+## [136]    dtrain-logloss:0.580025 
+## [137]    dtrain-logloss:0.579859 
+## [138]    dtrain-logloss:0.579733 
+## [139]    dtrain-logloss:0.579646 
+## [140]    dtrain-logloss:0.579428 
+## [141]    dtrain-logloss:0.579306 
+## [142]    dtrain-logloss:0.579104 
+## [143]    dtrain-logloss:0.578900 
+## [144]    dtrain-logloss:0.578708 
+## [145]    dtrain-logloss:0.578558 
+## [146]    dtrain-logloss:0.578447 
+## [147]    dtrain-logloss:0.578365 
+## [148]    dtrain-logloss:0.578240 
+## [149]    dtrain-logloss:0.578110 
+## [150]    dtrain-logloss:0.578048 
+## [151]    dtrain-logloss:0.577777 
+## [152]    dtrain-logloss:0.577499 
+## [153]    dtrain-logloss:0.577319 
+## [154]    dtrain-logloss:0.577218 
+## [155]    dtrain-logloss:0.577050
+\end{verbatim}
+
+Model Prediction Converting the testing data to matrix format for
+prediction
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{testMatrix }\OtherTok{\textless{}{-}} \FunctionTok{data.matrix}\NormalTok{(testingSet, }\AttributeTok{rownames.force =} \ConstantTok{NA}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Using the trained model to predict the shot outcomes
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{predictedValues }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(finalModel, testMatrix)}
+\end{Highlighting}
+\end{Shaded}
+
+Preparing the Submission File Combining the `shot\_id' with the
+predicted `shot\_made\_flag' values. Then, writing the submission file
+to a CSV
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{finalSubmission }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{shot\_id =}\NormalTok{ testShotId, }\AttributeTok{shot\_made\_flag =}\NormalTok{ predictedValues)}
+\FunctionTok{write.csv}\NormalTok{(finalSubmission, }\StringTok{"/Users/christian/Desktop/STAT348/Kobe/kobe{-}bryant{-}shot{-}selection/submission6.csv"}\NormalTok{, }\AttributeTok{row.names =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

@@ -1,0 +1,201 @@
+---
+title: "Kobe_Final"
+author: "Christian Yang"
+date: "2023-12-16"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+<style type="text/css">
+h1.title {
+  font-size: 40px;
+  text-align: center;
+}
+</style>
+## Load packages
+```{r setup, include=FALSE}
+library(xgboost)
+library(data.table)
+library(Matrix)
+
+```
+
+
+Loading the dataset from a CSV file
+
+```{r}
+dataPath <- "/Users/christian/Desktop/STAT348/Kobe/kobe-bryant-shot-selection/data.csv"
+kobeData <- as.data.frame(fread(dataPath, header = TRUE, stringsAsFactors = TRUE))
+
+
+```
+
+Splitting the dataset into training and testing sets
+Training set: Data with known shot outcomes (non-NA in 'shot_made_flag')
+Testing set: Data where shot outcomes need to be predicted (NA in 'shot_made_flag')
+
+
+```{r}
+trainingSet <- subset(kobeData, !is.na(kobeData$shot_made_flag))
+testingSet <- subset(kobeData, is.na(kobeData$shot_made_flag))
+
+```
+
+Preparing the data
+Extracting 'shot_id' for submission and removing it from training and testing sets
+
+
+```{r}
+testShotId <- testingSet$shot_id
+trainingSet$shot_id <- NULL
+testingSet$shot_id <- NULL
+
+```
+
+Feature Engineering
+Creating a new feature 'remaining_time' by combining minutes and seconds remaining
+
+
+```{r}
+trainingSet$remaining_time <- trainingSet$minutes_remaining * 60 + trainingSet$seconds_remaining
+testingSet$remaining_time <- testingSet$minutes_remaining * 60 + testingSet$seconds_remaining
+
+```
+
+Data Cleaning
+Capping 'shot_distance' at 45 to remove outliers
+```{r}
+
+trainingSet$shot_distance[trainingSet$shot_distance > 45] <- 45
+testingSet$shot_distance[testingSet$shot_distance > 45] <- 45
+```
+
+
+Removing unnecessary features that do not contribute to the model
+```{r}
+colsToRemove <- c("seconds_remaining", "team_name", "team_id", "game_event_id", "game_id", "lat", "lon")
+trainingSet[, colsToRemove] <- NULL
+testingSet[, colsToRemove] <- NULL
+```
+
+Preparing the target variable and features for the model
+Separating the label (shot_made_flag) from the training data
+
+```{r}
+trainLabels <- trainingSet$shot_made_flag
+trainingSet$shot_made_flag <- NULL
+testingSet$shot_made_flag <- NULL
+```
+
+Initializing a vector to store predictions
+
+```{r}
+predictionVector <- rep(0, nrow(testingSet))
+```
+
+Data Transformation
+Converting data frames to matrices which are required for xgboost training
+
+
+```{r}
+trainMatrix <- data.matrix(trainingSet, rownames.force = NA)
+dTrainMatrix <- xgb.DMatrix(data = trainMatrix, label = trainLabels, missing = NaN)
+
+```
+
+Setting up the training environment
+Creating a watchlist to monitor the training performance
+
+
+```{r}
+trainingWatchlist <- list(dtrain = dTrainMatrix)
+```
+
+Setting a random seed for reproducibility
+
+```{r}
+set.seed(1234)
+```
+
+
+Configuring the parameters for the xgboost model
+Adjusting parameters like 'eta', 'max_depth' for better performance
+```{r}
+xgbParams <- list(
+  objective = "binary:logistic",
+  booster = "gbtree",
+  eval_metric = "logloss",
+  eta = 0.05,
+  max_depth = 5,
+  subsample = 0.5,
+  colsample_bytree = 0.5,
+  min_child_weight = 1
+)
+```
+Performing cross-validation to determine the optimal number of boosting rounds
+# 'nfold' and 'early.stop.round' are set to prevent overfitting
+
+```{r}
+xgbModelCV <- xgb.cv(
+  params = xgbParams, 
+  data = dTrainMatrix, 
+  nrounds = 2000,
+  verbose = 1,
+  watchlist = trainingWatchlist,
+  maximize = FALSE,
+  nfold = 5,
+  early.stop.round = 20,
+  print.every.n = 1
+)
+```
+
+Inspecting the structure of the cross-validation result to find the optimal round
+
+
+```{r}
+
+print(summary(xgbModelCV))
+print(colnames(xgbModelCV$evaluation_log))
+
+```
+
+Determining the best round based on minimum test logloss
+
+```{r}
+optimalRound <- which.min(xgbModelCV$evaluation_log$test_logloss_mean)
+```
+
+
+Training the final xgboost model with the optimal number of rounds
+```{r}
+finalModel <- xgb.train(
+  params = xgbParams, 
+  data = dTrainMatrix, 
+  nrounds = optimalRound, 
+  verbose = 1,
+  watchlist = trainingWatchlist,
+  maximize = FALSE
+)
+```
+
+Model Prediction
+Converting the testing data to matrix format for prediction
+
+```{r}
+testMatrix <- data.matrix(testingSet, rownames.force = NA)
+```
+
+Using the trained model to predict the shot outcomes
+```{r}
+predictedValues <- predict(finalModel, testMatrix)
+```
+
+Preparing the Submission File
+Combining the 'shot_id' with the predicted 'shot_made_flag' values.
+Then, writing the submission file to a CSV
+
+```{r}
+finalSubmission <- data.frame(shot_id = testShotId, shot_made_flag = predictedValues)
+write.csv(finalSubmission, "/Users/christian/Desktop/STAT348/Kobe/kobe-bryant-shot-selection/submission6.csv", row.names = FALSE)
+```
